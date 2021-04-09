@@ -8,7 +8,8 @@ import { Game } from 'src/models/game';
 })
 export class GameComponent implements OnInit {
   pickCardAnimation = false;
-  game!: Game; 
+  currentCard: string | undefined = ''; //shows the name of the current card from the stack (lying on top)
+  game!: Game;
 
   constructor() { }
 
@@ -24,7 +25,16 @@ export class GameComponent implements OnInit {
 
 
   takeCard() {
+    if (!this.pickCardAnimation) // only if pickCardAnimation is false the rest of the function is running
+      this.currentCard = this.game.stack.pop(); //last card from array
     this.pickCardAnimation = true;
+    console.log('Game is', this.game);
+
+
+    setTimeout(() => {
+      this.game.playedCard.push(this.currentCard!);
+      this.pickCardAnimation = false;
+    }, 1200); //only allowed to click on the stack every 1500ms
   }
 
 }
