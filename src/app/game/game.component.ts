@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-game',
@@ -13,10 +14,14 @@ export class GameComponent implements OnInit {
   currentCard: string | undefined = ''; //shows the name of the current card from the stack (lying on top)
   game!: Game;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(private firestore: AngularFirestore, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.newGame();
+    this.firestore.collection('items').valueChanges()
+    .subscribe((game) =>{
+      console.log('Game update', game)
+    })
   }
 
 
@@ -45,9 +50,9 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe((name: string) => {
-      if(name && name.length > 0 ) { // check if the variable exist and when it exist than check if the length of the name is bigger than 0
-      this.game.players.push(name);
-    }
+      if (name && name.length > 0) { // check if the variable exist and when it exist than check if the length of the name is bigger than 0
+        this.game.players.push(name);
+      }
     });
   }
 

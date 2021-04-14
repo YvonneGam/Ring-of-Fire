@@ -1,11 +1,72 @@
-.start-screen {
-    background-image: url();
-    background-color: cadetblue;
-    width: 100vw;
-    height: 100vh;
-    max-width: 100%;
+.all {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.start-screen {
+    background-image: url("../../assets/img/bar-local-cong-ireland-63633.jpeg");
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    filter: brightness(50%);
+    top: 0; 
+    position: absolute;
+    z-index: -1;
+}
+
+
+h1 {
+    font-family: comic-serif-pro, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14rem; 
+    text-align: center;
+    color: rgba(255,255,255, 0.1);
+    background-image: url("../../assets/img/42180-kleiner.jpg");
+    background-repeat: repeat-x;
+    background-clip: text;
+    animation: animate 10s linear infinite;
+}
+
+
+@keyframes animate {
+
+0%{
+    background-position: left 0px top 60px; 
+}
+20%{
+    background-position: left 200px top 40px; 
+}
+40%{
+    background-position: left 400px top 20px; 
+}
+60%{
+    background-position: left 600px top 40px; 
+}
+
+100%{
+    background-position: left 800px top 60px; 
+}
+}
+
+
+
+button {
+background-color: black;
+color: white;
+font-family: comic-serif-pro, sans-serif;
+font-weight: 400;
+font-style: normal;
+font-size: 2rem;
+border: none; 
+padding: 16px; 
+cursor: pointer;
+transition: 0.4s ease-in-out;
+
+
+&:hover {
+    background-color: rgb(25,25,25);
+}
 }

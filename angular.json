@@ -10,7 +10,7 @@
           "style": "scss"
         },
         "@schematics/angular:application": {
-          "strict": true
+          "strict": false
         }
       },
       "root": "",
@@ -125,6 +125,10 @@
               "devServerTarget": "ringoffire:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }
