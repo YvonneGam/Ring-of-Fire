@@ -30,8 +30,8 @@ import { environment } from 'src/environments/environment';
     GameInfoComponent
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firebase),
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     MatButtonModule,
     MatFormFieldModule,
