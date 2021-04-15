@@ -11,50 +11,52 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-  pickCardAnimation = false;
-  currentCard: string | undefined = ''; //shows the name of the current card from the stack (lying on top)
   game!: Game;
+  gameId: string;
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.newGame(); 
+    this.newGame();
     this.route.params.subscribe((params) => { //gets current route (ActivatedRoute)
+      this.gameId = params.id;
       console.log('this is my', params.id);
 
       this.firestore.collection('games')
-      .doc(params.id)
-      .valueChanges()
-      .subscribe((game: any) => {
-        console.log('Game update', game)
-        this.game.currentPlayer = game.currentPlayer;
-        this.game.playedCard = game.playedCard;
-        this.game.players = game.players;
-        this.game.stack = game.stack;
-      });
+        .doc(this.gameId)
+        .valueChanges()
+        .subscribe((game: any) => {
+          console.log('Game update', game)
+          this.game.currentPlayer = game.currentPlayer;
+          this.game.playedCard = game.playedCard;
+          this.game.players = game.players;
+          this.game.stack = game.stack;
+          this.game.pickCardAnimation = game.pickCardAnimation;
+          this.game.currentCard = game.currentCard;
+        });
     });
   }
 
 
   newGame() {
     this.game = new Game();
-/*         this.firestore.collection('games')
-          .add(this.game.toJson()); //add json to firesstore  */
   }
 
 
   takeCard() {
-    if (!this.pickCardAnimation) // only if pickCardAnimation is false the rest of the function is running
-      this.currentCard = this.game.stack.pop(); //last card from array
-    this.pickCardAnimation = true;
+    if (!this.game.pickCardAnimation) // only if pickCardAnimation is false the rest of the function is running
+      this.game.currentCard = this.game.stack.pop(); //last card from array
+    this.game.pickCardAnimation = true;
     console.log('Game is', this.game);
 
     this.game.currentPlayer++; //counts to the next player
     this.game.currentPlayer = this.game.currentPlayer % this.game.players.length; //divide the index
-
+    this.saveGame(); //wenn Karte weggenommen wird
+    
     setTimeout(() => {
-      this.game.playedCard.push(this.currentCard!);
-      this.pickCardAnimation = false;
+      this.game.playedCard.push(this.game.currentCard!);
+      this.game.pickCardAnimation = false;
+      this.saveGame(); //wenn Karte zu neuem Stapel gepusht wird
     }, 1200); //only allowed to click on the stack every 1500ms
   }
 
@@ -64,8 +66,16 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) { // check if the variable exist and when it exist than check if the length of the name is bigger than 0
         this.game.players.push(name);
+        this.saveGame();
       }
     });
+  }
+
+  saveGame() {
+    this.firestore.collection('games')
+      .doc(this.gameId)
+      .update(this.game.toJson());
+
   }
 
 }

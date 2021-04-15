@@ -3,6 +3,8 @@ export class Game {
   public stack: string[] = []; //stack = der Stapel
   public playedCard: string[] = [];
   public currentPlayer: number = 0;
+  public pickCardAnimation = false;
+  public currentCard: string | undefined = ''; //shows the name of the current card from the stack (lying on top)
 
 
   constructor() {
@@ -22,6 +24,8 @@ export class Game {
       stack: this.stack,
       playedCard: this.playedCard,
       currentPlayer: this.currentPlayer,
+      pickCardAnimation: this.pickCardAnimation,
+      currentCard: this.currentCard
     };
   }
 }

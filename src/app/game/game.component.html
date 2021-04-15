@@ -6,15 +6,15 @@
     <div class="card-stack">
         <!--Stack-->
         <img *ngFor="let card of [1,2,3,4]; let i = index;" [ngStyle]="{'right.px': i * 5}"
-            src="assets/img/card_cover.png">
-        <img (click)="takeCard()" class="top-card" style="right: 25px" src="assets/img/card_cover.png">
+            src="/assets/img/card_cover.png">
+        <img (click)="takeCard()" class="top-card" style="right: 25px" src="/assets/img/card_cover.png">
 
         <!--Stack for played cards-->
-        <img *ngFor="let card of game.playedCard" class="played-card" src="assets/img/{{ card }}.png">
+        <img *ngFor="let card of game.playedCard" class="played-card" src="/assets/img/{{ card }}.png">
 
         <!--Current card (animation)-->
-        <img (click)="takeCard()" *ngIf="pickCardAnimation" class="pickCardAnimation pick-card" style="right: 25px"
-            src="assets/img/{{ currentCard }}.png">
+        <img (click)="takeCard()" *ngIf="game.pickCardAnimation" class="pickCardAnimation pick-card" style="right: 25px"
+            src="/assets/img/{{ game.currentCard }}.png">
 
     </div>
 
@@ -28,4 +28,4 @@
 <a href='https://www.freepik.com/vectors/texture'>Texture vector created by macrovector - www.freepik.com</a>
 <a href='https://de.freepik.com/vektoren/hintergrund'>Hintergrund Vektor erstellt von macrovector - de.freepik.com</a>
 
-<app-game-info [card]="currentCard" class="card-bottom"></app-game-info>
+<app-game-info [card]="game.currentCard" class="card-bottom"></app-game-info>
