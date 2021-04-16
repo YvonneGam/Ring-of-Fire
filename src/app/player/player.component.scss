@@ -2,7 +2,8 @@
     display: flex;
     align-items: center;
     width: 250px;
-    background-color: rgb(238, 225, 215);
+    background-color: #141247;
+    color: white; 
     padding: 12px;
 
 span{
@@ -19,6 +20,6 @@ span{
 }
 
 .active-player{
-    background-color: rgb(67, 143, 111) !important;
+    background-color: #d6002b !important;
     color: black; 
 }

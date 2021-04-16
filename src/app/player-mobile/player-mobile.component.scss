@@ -3,7 +3,8 @@
     flex-direction: column;
     align-items: center; 
     width: 55px;
-    background-color: rgb(238, 225, 215);
+    background-color: #141247;
+    color: white;
     padding: 6px;
     padding-bottom: 10px;
 
@@ -22,7 +23,7 @@
 }
 
 .active-player {
-    background-color: rgb(67, 143, 111) !important;
+    background-color: #d6002b !important;
     color: black;
 }
 

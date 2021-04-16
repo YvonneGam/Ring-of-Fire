@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
 @Component({
   selector: 'app-game',
@@ -13,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class GameComponent implements OnInit {
   game!: Game;
   gameId: string;
+  playerImages: any;
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
@@ -30,6 +32,7 @@ export class GameComponent implements OnInit {
           this.game.currentPlayer = game.currentPlayer;
           this.game.playedCard = game.playedCard;
           this.game.players = game.players;
+          this.playerImages = game.playerImages,
           this.game.stack = game.stack;
           this.game.pickCardAnimation = game.pickCardAnimation;
           this.game.currentCard = game.currentCard;
@@ -52,7 +55,7 @@ export class GameComponent implements OnInit {
     this.game.currentPlayer++; //counts to the next player
     this.game.currentPlayer = this.game.currentPlayer % this.game.players.length; //divide the index
     this.saveGame(); //wenn Karte weggenommen wird
-    
+
     setTimeout(() => {
       this.game.playedCard.push(this.game.currentCard!);
       this.game.pickCardAnimation = false;
@@ -66,6 +69,7 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) { // check if the variable exist and when it exist than check if the length of the name is bigger than 0
         this.game.players.push(name);
+        this.game.playerImages.push('huskey.png');
         this.saveGame();
       }
     });
@@ -76,6 +80,18 @@ export class GameComponent implements OnInit {
       .doc(this.gameId)
       .update(this.game.toJson());
 
+  }
+
+
+  editPlayer(playerid: number) {
+    console.log('edit player', playerid);
+
+    const dialogRef = this.dialog.open(EditPlayerComponent);
+    dialogRef.afterClosed().subscribe((change: string) => {
+      console.log('Received change', change);
+      this.game.playerImages[playerid] = change;
+      this.saveGame();
+    });
   }
 
 }
