@@ -1,6 +1,10 @@
 <app-player *ngFor="let player of game.players, let i = index;" [ngStyle]="{'top.px': 100 + (i * 100)}"
-[activePlayer]="i == game.currentPlayer"
-    class="player-position" [name]="player"></app-player>
+    [activePlayer]="i == game.currentPlayer" class="player-position hide-mobile" [name]="player"></app-player>
+
+<div class="scroll-container hide-desktop">
+    <app-player-mobile *ngFor="let player of game.players, let i = index;" [activePlayer]="i == game.currentPlayer"
+        [name]="player"></app-player-mobile>
+</div>
 
 <div class="playground">
     <div class="card-stack">
@@ -24,7 +28,7 @@
 </button>
 
 
- <a href='https://de.freepik.com/vektoren/symbol'>Symbol Vektor erstellt von macrovector - de.freepik.com</a> 
+<a href='https://de.freepik.com/vektoren/symbol'>Symbol Vektor erstellt von macrovector - de.freepik.com</a>
 <a href='https://www.freepik.com/vectors/texture'>Texture vector created by macrovector - www.freepik.com</a>
 <a href='https://de.freepik.com/vektoren/hintergrund'>Hintergrund Vektor erstellt von macrovector - de.freepik.com</a>
 

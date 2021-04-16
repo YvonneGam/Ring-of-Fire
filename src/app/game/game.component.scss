@@ -69,3 +69,18 @@
     left: 100px;
     right: 100px;
 }
+
+
+.scroll-container {
+    display: flex; 
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    app-player-mobile{
+        margin-left: 5px;
+    }
+}

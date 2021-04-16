@@ -1,0 +1,29 @@
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 55px;
+    background-color: rgb(238, 225, 215);
+    padding: 6px;
+    padding-bottom: 10px;
+
+    span {
+        font-size: 12px;
+        margin-top: 20px;
+        margin-bottom: 15px;
+    }
+    img {
+        width: 35px;
+        height: 35px;
+        background-color: seashell;
+        border-radius: 100%;
+        object-fit: cover;
+    }
+}
+
+.active-player {
+    background-color: rgb(67, 143, 111) !important;
+    color: black;
+}
+
+
