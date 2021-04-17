@@ -4,14 +4,15 @@
 
 <div class="scroll-container">
     <app-player-mobile (click)="editPlayer(i)" *ngFor="let player of game.players, let i = index;"
-        [activePlayer]="i == game.currentPlayer" class="hide-desktop"
-        [image]="game.playerImages[i]" [name]="player"></app-player-mobile>
+        [activePlayer]="i == game.currentPlayer" class="hide-desktop" [image]="game.playerImages[i]" [name]="player">
+    </app-player-mobile>
 </div>
 
 
 <div *ngIf="gameOver" class="gameOver">
-    <h2>Game over</h2>
-    <img src="./assets/img/alcoholic-asian-man-with-a-lot-of-beer-bottles.jpg">
+    <h2>You´re done</h2>
+    <img src="../../assets/img/alcoholic-asian-man-with-a-lot-of-beer-bottles.jpg">
+   <button> <a routerLink="/">Play again</a></button>
 </div>
 
 
@@ -39,12 +40,7 @@
 <app-game-info *ngIf="!gameOver" [card]="game.currentCard" class="card-bottom"></app-game-info>
 
 
-        <!--preload the next image -->
-        <img class="preload-img" src="../../assets/img/{{ game.stack[game.stack.length -1] }}.png">
+<!--preload the next image -->
+<!-- <img class="preload-img" src="../../assets/img/{{ game.stack[game.stack.length -1] }}.png">
 
-
-
-<a href='https://de.freepik.com/vektoren/symbol'>Symbol Vektor erstellt von macrovector - de.freepik.com</a>
-<a href='https://www.freepik.com/vectors/texture'>Texture vector created by macrovector - www.freepik.com</a>
-<a href='https://de.freepik.com/vektoren/hintergrund'>Hintergrund Vektor erstellt von macrovector - de.freepik.com</a>
-<a href='https://de.freepik.com/fotos/menschen'>Menschen Foto erstellt von jcomp - de.freepik.com</a> 
+ -->

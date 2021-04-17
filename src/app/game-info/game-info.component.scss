@@ -1,9 +1,15 @@
 mat-card {
     @media (max-width: 750px) {
         min-height: 120px; 
+        border-radius: 0px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
     }
 }
 
 mat-card-title {
     font-family: comic-serif-pro, sans-serif;
+    color: #141247;
 }
