@@ -15,6 +15,7 @@ export class GameComponent implements OnInit {
   game!: Game;
   gameId: string;
   playerImages: any;
+  gameOver = false;
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
@@ -33,7 +34,7 @@ export class GameComponent implements OnInit {
           this.game.playedCard = game.playedCard;
           this.game.players = game.players;
           this.playerImages = game.playerImages,
-          this.game.stack = game.stack;
+            this.game.stack = game.stack;
           this.game.pickCardAnimation = game.pickCardAnimation;
           this.game.currentCard = game.currentCard;
         });
@@ -47,20 +48,27 @@ export class GameComponent implements OnInit {
 
 
   takeCard() {
-    if (!this.game.pickCardAnimation) // only if pickCardAnimation is false the rest of the function is running
-      this.game.currentCard = this.game.stack.pop(); //last card from array
-    this.game.pickCardAnimation = true;
-    console.log('Game is', this.game);
+    if (this.game.players.length > 0) {
+      if (this.game.stack.length == 0) {
+        this.gameOver = true;
+      }
+      else if (!this.game.pickCardAnimation) // only if pickCardAnimation is false the rest of the function is running
+        this.game.currentCard = this.game.stack.pop(); //last card from array
+      this.game.pickCardAnimation = true;
+      console.log('Game is', this.game);
 
-    this.game.currentPlayer++; //counts to the next player
-    this.game.currentPlayer = this.game.currentPlayer % this.game.players.length; //divide the index
-    this.saveGame(); //wenn Karte weggenommen wird
+      this.game.currentPlayer++; //counts to the next player
+      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length; //divide the index
+      this.saveGame(); //wenn Karte weggenommen wird
 
-    setTimeout(() => {
-      this.game.playedCard.push(this.game.currentCard!);
-      this.game.pickCardAnimation = false;
-      this.saveGame(); //wenn Karte zu neuem Stapel gepusht wird
-    }, 1200); //only allowed to click on the stack every 1500ms
+      setTimeout(() => {
+        this.game.playedCard.push(this.game.currentCard!);
+        this.game.pickCardAnimation = false;
+        this.saveGame(); //wenn Karte zu neuem Stapel gepusht wird
+      }, 1200); //only allowed to click on the stack every 1500ms
+    } else {//if players.length >0
+      alert('Please add players first, than you can start playing');
+    }
   }
 
   openDialog(): void {
@@ -82,17 +90,26 @@ export class GameComponent implements OnInit {
 
   }
 
-
+  // Changes the picked picture for each player
   editPlayer(playerid: number) {
     console.log('edit player', playerid);
 
     const dialogRef = this.dialog.open(EditPlayerComponent);
     dialogRef.afterClosed().subscribe((change: string) => {
       console.log('Received change', change);
-      this.game.playerImages[playerid] = change;
-      this.saveGame();
+      if (change) {
+        if (change == 'DELETE') {
+          this.game.players.splice(playerid, 1);
+          this.game.playerImages.splice(playerid, 1);
+        } else {
+          this.game.playerImages[playerid] = change;
+        }
+        this.saveGame();
+      }
     });
   }
+
+
 
 }
 

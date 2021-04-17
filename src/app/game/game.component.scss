@@ -104,3 +104,33 @@ app-player-mobile {
         filter: brightness(1);
     }
 }
+
+.gameOver {
+    display: flex;
+
+    img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        object-fit: cover;
+    }
+
+    h2{
+        z-index: 1;
+        font-family: comic-serif-pro, sans-serif;
+        color: white;
+        font-size: 10rem;
+        text-align: center;
+        width:100vw;
+        letter-spacing: 10px;
+    }
+}
+
+.preload-img {
+    opacity: 0;
+    z-index: -999999;
+    height: 0px;
+    width: 0px;
+    top: 0;
+}

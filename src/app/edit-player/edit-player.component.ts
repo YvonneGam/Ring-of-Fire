@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-player',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditPlayerComponent implements OnInit {
 allProfilePictures = ['akita.png', 'beagle.png', 'chihuahua.png', 'dachshund.png', 'dalmatiner.png', 'huskey.png', 'ka.png', 'pommeranian.png', 'schnauzer.png', 'shitsu.png' ]
-  constructor() { }
+  
+constructor(public dialogRef: MatDialogRef<EditPlayerComponent>) { }
 
   ngOnInit(): void {
   }
