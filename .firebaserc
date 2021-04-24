@@ -1,11 +1,5 @@
 {
-  "targets": {
-    "fir-demo-project": {
-      "hosting": {
-        "ringoffire": [
-          "fir-demo-project"
-        ]
-      }
-    }
+  "projects": {
+    "default": "yvonnefirebase"
   }
 }

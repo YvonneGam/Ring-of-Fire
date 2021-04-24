@@ -11,7 +11,7 @@
 
 <div *ngIf="gameOver" class="gameOver">
     <h2>You´re done</h2>
-    <img src="../../assets/img/alcoholic-asian-man-with-a-lot-of-beer-bottles.jpg">
+    <img src="assets/img/alcoholic-asian-man-with-a-lot-of-beer-bottles.jpg">
    <button> <a routerLink="/">Play again</a></button>
 </div>
 
@@ -20,15 +20,15 @@
     <div class="card-stack">
         <!--Stack-->
         <img *ngFor="let card of [1,2,3,4]; let i = index;" [ngStyle]="{'right.px': i * 5}"
-            src="../../assets/img/card_cover.png">
-        <img (click)="takeCard()" class="top-card" style="right: 25px" src="../../assets/img/card_cover.png">
+            src="assets/img/card_cover.png">
+        <img (click)="takeCard()" class="top-card" style="right: 25px" src="assets/img/card_cover.png">
 
         <!--Stack for played cards-->
-        <img *ngFor="let card of game.playedCard" class="played-card" src="../../assets/img/{{ card }}.png">
+        <img *ngFor="let card of game.playedCard" class="played-card" src="assets/img/{{ card }}.png">
 
         <!--Current card (animation)-->
         <img (click)="takeCard()" *ngIf="game.pickCardAnimation" class="pickCardAnimation pick-card" style="right: 25px"
-            src="../../assets/img/{{ game.currentCard }}.png">
+            src="assets/img/{{ game.currentCard }}.png">
 
     </div>
 
